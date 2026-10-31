@@ -1,0 +1,334 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0e17">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FARHAD TECH">
+    <title>FARHAD TECH | التقني فرهاد - للصيانة والبرمجة والشبكات</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Cairo & Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        cyber: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#070b12',
+                            card: '#101726',
+                            border: '#1e293b',
+                            neon: '#00f0ff',
+                            blue: '#0077ff',
+                            accent: '#38bdf8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background-color: #070b12;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.08) 0%, transparent 35%),
+                radial-gradient(circle at 85% 80%, rgba(0, 119, 255, 0.08) 0%, transparent 40%);
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+        .font-cyber {
+            font-family: 'Orbitron', sans-serif;
+        }
+        /* Neon Glow Effects */
+        .neon-border {
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.06);
+        }
+        .neon-border-strong {
+            border: 1px solid rgba(0, 240, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+        .cyber-gradient {
+            background: linear-gradient(135deg, #00f0ff 0%, #0077ff 100%);
+        }
+        .cyber-card {
+            background: rgba(16, 23, 38, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.18);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070b12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f0ff;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 12px rgba(0, 240, 255, 0.25); }
+            50% { box-shadow: 0 0 24px rgba(0, 240, 255, 0.55); }
+        }
+        .pulse-glow {
+            animation: pulseGlow 2.5s infinite ease-in-out;
+        }
+        .tab-section {
+            display: none;
+            animation: fadeIn 0.25s ease-out;
+        }
+        .tab-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-24 select-none">
+
+    <!-- TOP HEADER BAR -->
+    <header class="sticky top-0 z-40 bg-[#070b12]/90 backdrop-blur-md border-b border-cyan-500/20 px-4 py-3">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <!-- Brand Identity -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-11 h-11 rounded-xl cyber-gradient p-[2px] pulse-glow">
+                    <div class="w-full h-full bg-[#070b12] rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid fa-microchip text-cyan-400 text-xl"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-cyber font-black text-base sm:text-lg tracking-wider text-white">FARHAD <span class="text-cyan-400">TECH</span></h1>
+                        <span id="cloudStatusBadge" class="inline-flex items-center gap-1 text-[10px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> متصل
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-400 font-semibold">التقني فرهاد • سنون - مقابل كوزمتك مشتاق</p>
+                </div>
+            </div>
+
+            <!-- Action Icons (Install QR & Admin Panel) -->
+            <div class="flex items-center gap-2">
+                <button onclick="openModal('qrModal')" class="p-2.5 rounded-xl cyber-card text-cyan-400 hover:bg-cyan-500/10 transition flex items-center gap-1.5 text-xs font-bold" title="تثبيت التطبيق ورمز QR">
+                    <i class="fa-solid fa-qrcode text-base"></i>
+                    <span class="hidden sm:inline">تثبيت التطبيق</span>
+                </button>
+                <button onclick="handleAdminAccess()" class="p-2.5 rounded-xl cyber-card text-slate-300 hover:text-cyan-400 hover:border-cyan-400/40 transition flex items-center gap-1.5 text-xs font-bold" title="لوحة الإدارة">
+                    <i class="fa-solid fa-user-shield text-base" id="adminLockIcon"></i>
+                    <span class="hidden sm:inline">الإدارة</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-4xl mx-auto px-4 pt-4 space-y-6">
+
+        <!-- ==================== TAB 1: HOME (الرئيسية) ==================== -->
+        <section id="tab-home" class="tab-section active space-y-6">
+            
+            <!-- Hero Banner -->
+            <div class="relative rounded-2xl overflow-hidden cyber-card neon-border p-5 sm:p-7">
+                <div class="absolute -left-10 -bottom-10 w-44 h-44 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="relative z-10 space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-bold">
+                        <i class="fa-solid fa-bolt"></i> المركز المتكامل للصيانة والبرمجة والشبكات
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white leading-snug">
+                        مرحباً بك في تطبيق <span class="text-transparent bg-clip-text cyber-gradient">التقني فرهاد</span>
+                    </h2>
+                    <p class="text-sm text-slate-300 leading-relaxed max-w-xl">
+                        تابع حالة جهازك في الصيانة لحظة بلحظة برقم الوصل أو رقم هاتفك، أو استعرض خدماتنا في صيانة الموبايل والحاسبات، تخطي الحسابات، تعديل البلايستيشن، وإدارة الشبكات.
+                    </p>
+
+                    <!-- Quick Tracker Box inside Home -->
+                    <div class="pt-2">
+                        <label class="block text-xs text-cyan-300 font-bold mb-2">
+                            <i class="fa-solid fa-magnifying-glass ml-1"></i> فحص سريع لحالة جهازك في الصيانة:
+                        </label>
+                        <div class="flex gap-2">
+                            <input type="text" id="homeQuickSearchInput" placeholder="أدخل رقم الوصل (مثلاً 101) أو رقم هاتفك..." 
+                                class="w-full bg-[#070b12]/90 border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition"
+                                onkeypress="if(event.key === 'Enter') quickTrackFromHome()">
+                            <button onclick="quickTrackFromHome()" class="cyber-gradient text-slate-950 font-black px-5 py-3 rounded-xl text-sm whitespace-nowrap hover:opacity-90 transition shadow-lg shadow-cyan-500/20">
+                                تتبع الآن
+                            </button>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2 mt-2 text-[11px] text-slate-400">
+                            <span>أرقام تجريبية للمعاينة:</span>
+                            <button onclick="testSampleTicket('101')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-cyan-500/20 text-cyan-300 border border-slate-700 transition">وصل #101</button>
+                            <button onclick="testSampleTicket('102')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-cyan-500/20 text-cyan-300 border border-slate-700 transition">وصل #102</button>
+                            <button onclick="testSampleTicket('103')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-cyan-500/20 text-cyan-300 border border-slate-700 transition">وصل #103</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Action Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <button onclick="switchTab('track')" class="cyber-card hover:border-cyan-400/50 p-4 rounded-2xl text-right transition group">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-3 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-Radar fa-satellite-dish text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-white">تتبع الصيانة</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">اعرف إذا جهازك جاهز</p>
+                </button>
+
+                <button onclick="switchTab('services')" class="cyber-card hover:border-cyan-400/50 p-4 rounded-2xl text-right transition group">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-3 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-layer-group text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-white">جميع الخدمات</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">موبايل، حاسبات، شبكات</p>
+                </button>
+
+                <button onclick="switchTab('booking')" class="cyber-card hover:border-cyan-400/50 p-4 rounded-2xl text-right transition group">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-3 group-hover:scale-110 transition">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-white">حجز واستفسار</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">أرسل عطل جهازك فوراً</p>
+                </button>
+
+                <button onclick="switchTab('contact')" class="cyber-card hover:border-cyan-400/50 p-4 rounded-2xl text-right transition group">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-3 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-location-dot text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-white">عنوان المحل</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">سنون - قرب الكراج</p>
+                </button>
+            </div>
+
+            <!-- Featured Services Preview -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-extrabold text-base text-white flex items-center gap-2">
+                        <span class="w-2 h-5 rounded-full cyber-gradient inline-block"></span>
+                        أبرز خدمات المحل
+                    </h3>
+                    <button onclick="switchTab('services')" class="text-xs text-cyan-400 font-bold hover:underline">عرض الكل <i class="fa-solid fa-arrow-left mr-1"></i></button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="homeServicesPreview">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- Direct Call / WhatsApp Strip -->
+            <div class="cyber-card rounded-2xl p-4 border border-cyan-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl shrink-0">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-white">هل تحتاج استشارة سريعة؟</h4>
+                        <p class="text-xs text-slate-400">تواصل مباشرة مع التقني فرهاد عبر الهاتف أو واتساب</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <a href="https://wa.me/9647512427489?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A7%D9%84%D8%AA%D9%82%D9%86%D9%8A%20%D9%81%D8%B1%D9%87%D8%A7%D8%AF%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1" target="_blank" class="flex-1 sm:flex-initial text-center bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl transition flex items-center justify-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp text-base"></i> واتساب
+                    </a>
+                    <a href="tel:07512427489" class="flex-1 sm:flex-initial text-center bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-slate-700 transition flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-phone"></i> اتصال
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TAB 2: REPAIR TRACKER (تتبع الصيانة) ==================== -->
+        <section id="tab-track" class="tab-section space-y-5">
+            <div class="cyber-card rounded-2xl p-5 neon-border space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-black text-white">تتبع حالة جهازك في الصيانة</h2>
+                        <p class="text-xs text-slate-400">أدخل رقم الوصل الموجود في بطاقة الاستلام أو رقم هاتفك</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-2">
+                    <input type="text" id="trackerSearchInput" placeholder="رقم الوصل (مثال: 101) أو رقم الهاتف..." 
+                        class="w-full bg-[#070b12] border border-slate-700 focus:border-cyan-400 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none"
+                        onkeypress="if(event.key === 'Enter') searchRepairTicket()">
+                    <button onclick="searchRepairTicket()" class="cyber-gradient text-slate-950 font-black px-6 py-3 rounded-xl text-sm hover:opacity-90 transition">
+                        بحث
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2 text-xs text-slate-400">
+                    <span>جرب البحث عن:</span>
+                    <button onclick="testSampleTicket('101')" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-cyan-500/20 text-cyan-300 border border-slate-700">وصل #101 (جاهز للاستلام)</button>
+                    <button onclick="testSampleTicket('102')" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-cyan-500/20 text-cyan-300 border border-slate-700">وصل #102 (قيد الفحص)</button>
+                    <button onclick="testSampleTicket('103')" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-cyan-500/20 text-cyan-300 border border-slate-700">وصل #103 (بانتظار قطعة)</button>
+                </div>
+            </div>
+
+            <!-- Search Result Container -->
+            <div id="trackerResultArea" class="space-y-4">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+        <!-- ==================== TAB 3: SERVICES (الخدمات والأسعار) ==================== -->
+        <section id="tab-services" class="tab-section space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                    <h2 class="text-xl font-black text-white">قائمة الخدمات المتوفرة</h2>
+                    <p class="text-xs text-slate-400">اضغط على أي خدمة للاستفسار عن السعر أو حجزها مباشرة عبر واتساب</p>
+                </div>
+                <!-- Category Filter Pills -->
+                <div class="flex items-center gap-1.5 overflow-x-auto pb-1" id="serviceCategoryFilters">
+                    <button onclick="filterServices('all')" class="service-filter-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-400 text-slate-950 whitespace-nowrap">الكل</button>
+                    <button onclick="filterServices('hardware')" class="service-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 whitespace-nowrap">صيانة هاردوير</button>
+                    <button onclick="filterServices('software')" class="service-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 whitespace-nowrap">برمجة وتخطي</button>
+                    <button onclick="filterServices('gaming')" class="service-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 whitespace-nowrap">ألعاب وبلايستيشن</button>
+                    <button onclick="filterServices('network')" class="service-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 whitespace-nowrap">شبكات وإنترنت</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="servicesGridContainer">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+        <!-- ==================== TAB 4: QUICK BOOKING (طلب صيانة فوري) ==================== -->
+        <section id="tab-booking" class="tab-section space-y-5">
+            <div class="cyber-card rounded-2xl p-5 sm:p-6 neon-border space-y-5">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl">
+                        <i 
